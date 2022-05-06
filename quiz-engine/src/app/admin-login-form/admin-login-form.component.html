@@ -1,0 +1,56 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <h1>Quiz Engine</h1>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<div class="login-container">
+  <form class="form-container" [formGroup]="formGroup">
+    <!-- header for the form -->
+    <div class="form-header">
+      <h1>Admin Login</h1>
+    </div>
+    <!-- form field group 1 -->
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <!-- Error if the email is invalid -->
+        <mat-error *ngIf="email.invalid && email.touched">
+          Invalid email
+        </mat-error>
+        <input
+          matInput
+          placeholder="Enter email"
+          formControlName="email"
+          type="email"
+        />
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <!-- if password is empty -->
+        <mat-error *ngIf="password.invalid && password.touched">
+          Invalid Password
+        </mat-error>
+        <input
+          matInput
+          placeholder="Enter Password"
+          type="password"
+          formControlName="password"
+        />
+      </mat-form-field>
+    </div>
+    <!-- Call to action button for to call the method to login the user -->
+    <div class="form-group">
+      <button
+        mat-raised-button
+        [disabled]="formGroup.invalid"
+        (click)="submitForm()"
+        color="primary"
+      >
+        Login
+      </button>
+    </div>
+  </form>
+</div>

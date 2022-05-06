@@ -1,0 +1,20 @@
+<app-user></app-user>
+<!-- disply description and video of selected quiz -->
+<mat-card class="quizzes" >
+        <mat-card-title>{{ title }}</mat-card-title>
+    <mat-card-content>
+        <p>
+            {{ description }}
+        </p>
+        <iframe [src]= "sanitizer.bypassSecurityTrustResourceUrl(video)" allowfullscreen >
+        </iframe>
+    </mat-card-content>
+
+    <mat-card-actions class="button-group">
+        <button  mat-raised-button color="primary" [routerLink]="['/quizStart']">Start Quiz</button>
+        <button  mat-raised-button color="primary" [routerLink]="['/user']" >Go back to menu</button>
+
+    </mat-card-actions>
+   
+</mat-card>
+  

@@ -1,0 +1,124 @@
+<app-admin-navbar></app-admin-navbar>
+<br>
+<br>
+<div class="container">
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+    <mat-label>Title</mat-label>
+    <input matInput type="text" name="title" [(ngModel)]="selectedQuiz.Title" placeholder="Title">
+    </mat-form-field>
+  </div>
+  <div class="form-group">
+    <mat-form-field appearance="outline">
+    <mat-label>Description</mat-label>
+    <textarea placeholder="Enter a brief description about the test" matInput rows="8" cols="80" name="desc" [(ngModel)]="selectedQuiz.Description"></textarea>
+    </mat-form-field>
+  </div>
+
+  <div class="form-group">
+    <mat-form-field appearance="outline">
+  <mat-label>Max Score</mat-label>
+  <input matInput type="text" name="MaxScore" [(ngModel)]="selectedQuiz.MaxScore" placeholder="Maximum marks">
+  </mat-form-field>
+</div>
+
+
+<!-- View question and options and remove question -->
+<p>Questions:</p>
+<div *ngFor="let item of selectedQuiz.Questions; let i = index;" class="form-group">
+<div class="form-group">
+    <mat-form-field appearance="outline">
+      <mat-label>Question {{i+1}}</mat-label>
+  <input matInput name="question" placeholder="Enter Question" [(ngModel)]="item.question">
+  </mat-form-field>
+  <br>
+  <mat-form-field appearance="outline">
+    <mat-label>Option 1</mat-label>
+  <input matInput name="option1" placeholder="Enter First Option"  [(ngModel)]="item.option1">
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Option 2</mat-label>
+  <input matInput name="option2" placeholder="Enter Second Option" [(ngModel)]="item.option2">
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Option 3</mat-label>
+  <input matInput name="option3" placeholder="Enter Third Option" [(ngModel)]="item.option3">
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Option 4</mat-label>
+  <input matInput name="option4" placeholder="Enter Fourth Option" [(ngModel)]="item.option4">
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Correct option</mat-label>
+  <input matInput name="correct" placeholder="Enter correct option number" [(ngModel)]="item.correct">
+  </mat-form-field>
+  <button name="button" (click)="remove(item,i)" mat-raised-button color="warn">Remove question</button>
+</div>
+</div>
+<br>
+<div class="form-group">
+  <button mat-raised-button color="primary" name="button" (click)="showform()">Add another question</button>
+</div>
+<br>
+
+
+<!-- add new question -->
+<div class="form-group" *ngIf="addNewQuestion">
+    <form #question='ngForm' (ngSubmit)="addQuestion(question)">
+      <div class="form-group">
+          <mat-form-field appearance="outline">
+            <mat-label>Question</mat-label>
+        <input matInput name="question" placeholder="Enter Question" ngModel>
+        </mat-form-field>
+        <br>
+        <mat-form-field appearance="outline">
+          <mat-label>Option 1</mat-label>
+        <input matInput name="option1" placeholder="Enter First Option" ngModel>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Option 2</mat-label>
+        <input matInput name="option2" placeholder="Enter Second Option" ngModel>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Option 3</mat-label>
+        <input matInput name="option3" placeholder="Enter Third Option" ngModel>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Option 4</mat-label>
+        <input matInput name="option4" placeholder="Enter Fourth Option" ngModel>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Correct option</mat-label>
+        <input matInput name="correct" placeholder="Enter correct option number" ngModel>
+        </mat-form-field>
+        <br>
+        <button type="submit" mat-raised-button color="primary">Submit</button>
+      </div>
+    </form>
+</div>
+<br>
+<br>
+
+
+<!-- update course video link -->
+<div class="form-group">
+  <form #link="ngForm" (ngSubmit)="updateLink(link)">
+    <mat-form-field appearance="outline">
+    <mat-label>Video Link</mat-label>
+    <input matInput type="text" name="CourseVideo" [(ngModel)]="selectedQuiz.CourseVideo"  placeholder="enter video link here">
+    </mat-form-field>
+    <button name="button" type="submit" mat-raised-button color="primary">Update</button>
+  </form>
+</div>
+
+<!-- Update course description -->
+<div class="form-group">
+  <form #desc="ngForm" (ngSubmit)="updateDesc(desc)">
+  <mat-form-field appearance="outline">
+  <mat-label>Course Description</mat-label>
+  <textarea placeholder="Enter a brief description about the course" matInput rows="8" cols="80" name="CourseDescription"  [(ngModel)]="selectedQuiz.CourseDescription"></textarea>
+  </mat-form-field>
+  <button name="button" type="submit" mat-raised-button color="primary">Update</button>
+  </form>
+</div>
+</div>

@@ -1,0 +1,190 @@
+<app-admin-navbar></app-admin-navbar>
+
+<div class="container">
+  <br />
+    <h1>List of all Quiz</h1>
+    <h2>Click on quiz to view/edit quiz</h2>
+  <!-- Display all quizzes -->
+
+    <div *ngFor="let item of quizzes">
+      <button (click)="editdata(item)" mat-raised-button style="margin-bottom: 10px; margin-top: 10px; border: 1px solid black;">{{ item.Title }}</button>
+      
+  </div>
+
+<div class="content">
+  <button type="button" mat-raised-button color="primary" (click)="showform()">
+    Add new quiz
+  </button>
+
+  <!-- <app-edit-quiz [selectedQuiz]="selectedQuiz" *ngIf="showQuiz"></app-edit-quiz> -->
+
+  <!-- Form to add new quiz -->
+
+  <div class="container" *ngIf="!hideForm">
+    <form class="form-container" [formGroup]="quizForm" (ngSubmit)="onSubmit()">
+      <!-- header for the form -->
+      <div class="form-group">
+        <mat-form-field appearance="outline">
+          <mat-label>Title</mat-label>
+          <input
+            matInput
+            type="text"
+            formControlName="Title"
+            required
+            placeholder="Title"
+          />
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <mat-form-field appearance="outline">
+          <mat-label>Description</mat-label>
+          <textarea
+            placeholder="Enter a brief description about the test"
+            matInput
+            rows="8"
+            cols="80"
+            formControlName="Description"
+            required
+          ></textarea>
+        </mat-form-field>
+      </div>
+
+      <!-- <div class="form-group">
+        <mat-form-field appearance="outline">
+          <mat-label>Max Score</mat-label>
+          <input
+            matInput
+            type="text"
+            formControlName="MaxScore"
+            required
+            placeholder="Maximum marks"
+          />
+        </mat-form-field>
+      </div> -->
+
+      <p>Questions:</p>
+      <div
+        formArrayName="Questions"
+        *ngFor="
+          let item of quizForm.get('Questions')['controls'];
+          let i = index
+        "
+        class="form-group"
+      >
+        <div [formGroupName]="i" class="form-group">
+          <mat-form-field appearance="outline">
+            <input
+              matInput
+              formControlName="question"
+              placeholder="Enter Question"
+              required
+            />
+          </mat-form-field>
+          <br />
+          <mat-form-field appearance="outline">
+            <mat-label>Option 1</mat-label>
+            <input
+              matInput
+              formControlName="option1"
+              placeholder="Enter First Option"
+              required
+            />
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Option 2</mat-label>
+            <input
+              matInput
+              formControlName="option2"
+              placeholder="Enter Second Option"
+              required
+            />
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Option 3</mat-label>
+            <input
+              matInput
+              formControlName="option3"
+              placeholder="Enter Third Option"
+              required
+            />
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Option 4</mat-label>
+            <input
+              matInput
+              formControlName="option4"
+              placeholder="Enter Fourth Option"
+              required
+            />
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Correct Option Number</mat-label>
+            <input
+              matInput
+              formControlName="correct"
+              placeholder="Enter values(1/2/3/4)"
+              required
+            />
+          </mat-form-field>
+          <button
+            class="btn btn-danger"
+            type="button"
+            (click)="removeItem(i)"
+            *ngIf="i > 0"
+            mat-raised-button
+            color="warn"
+          >
+            Remove
+          </button>
+        </div>
+        <br />
+        <div class="form-group">
+          <button
+            class="btn btn-primary"
+            type="button"
+            (click)="addItem()"
+            mat-raised-button
+            color="primary"
+          >
+            Add another question
+          </button>
+        </div>
+      </div>
+      <div class="form-group">
+        <mat-form-field appearance="outline">
+          <mat-label>Video Link</mat-label>
+          <input
+            matInput
+            type="text"
+            formControlName="CourseVideo"
+            placeholder="enter video link here"
+          />
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <mat-form-field appearance="outline">
+          <mat-label>Course Description</mat-label>
+          <textarea
+            placeholder="Enter a brief description about the course"
+            matInput
+            rows="8"
+            cols="80"
+            formControlName="CourseDescription"
+            required
+          ></textarea>
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <button
+          type="submit"
+          class="btn btn-success"
+          [disabled]="!quizForm.valid"
+          mat-raised-button
+          color="primary"
+        >
+          Submit
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,43 @@
+  
+  <app-user></app-user>
+  <mat-tab-group mat-align-tabs="center" >
+    <mat-tab label="Quizzes">
+        <!-- Display quizzes which are not attempted -->
+                <div  *ngFor="let quiz of quizzes | async; let i = index">  
+                    <div *ngIf= "checkNotAttempted(i) ">       
+                        <mat-card class="quizzes" >
+                            <mat-card-header (click)="getIndex(i)" [routerLink]="['/qdescription']" >
+                                <mat-card-title>{{ quiz.Title }}</mat-card-title>
+                                <mat-card-subtitle>{{ quiz.Description }}</mat-card-subtitle>
+                                <mat-card-subtitle>Max score: {{ quiz.MaxScore }}</mat-card-subtitle>
+                            </mat-card-header>
+                        </mat-card>
+        
+                    </div>
+                </div>
+        
+        </mat-tab>
+    <mat-tab label="Previously Attempted Quizzes">
+<!-- Display previously attempted quizzes -->
+        <div *ngFor="let quiz of quizzes | async; let i = index">
+            <div *ngFor="let user of quiz.Users " >
+                <div *ngIf = " user.email == loginuser.email "> 
+                    <mat-card class="quizzes" >
+                        <mat-card-header>
+                            <mat-card-title>{{ quiz.Title }}</mat-card-title>
+                            <mat-card-subtitle >Quiz Attempted on: {{user.date}}</mat-card-subtitle>
+                            <mat-card-subtitle >Your Score: {{ user.score }}</mat-card-subtitle>
+                            <mat-card-subtitle>Max score: {{ quiz.MaxScore }}</mat-card-subtitle>   
+                        </mat-card-header>
+
+                    </mat-card>
+                </div>
+            </div>
+        </div>
+
+</mat-tab>
+
+</mat-tab-group>    
+  
+
+

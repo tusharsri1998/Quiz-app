@@ -1,0 +1,15 @@
+.quizzes {
+    max-width: 500px;
+    margin: auto;
+    margin-top: 20px;
+    border: 1px solid black;
+    text-align: center;
+  }
+  .button-group {
+    justify-content: space-between;
+    text-align: center;
+  }
+  #head{
+    text-align: center;
+  }
+  
